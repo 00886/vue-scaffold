@@ -1,11 +1,12 @@
 import { createWebHistory, createRouter, } from 'vue-router'
 
 const indexRoute = {
-    path:'/',
+    path: '/',
     component: () => import('../view/Index.vue'),
 }
 const routes = [
     indexRoute,
+    { path: '/login', component: () => import('../view/Login.vue') },
 ]
 
 const router = createRouter({
