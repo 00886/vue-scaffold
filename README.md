@@ -4,5 +4,5 @@
 pnpm add vue-router@4
 pnpm add pinia
 pnpm add axios
-pnpm install element-plus
+pnpm add element-plus
 ```
