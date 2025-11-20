@@ -7,6 +7,7 @@ const indexRoute = {
 const routes = [
     indexRoute,
     { path: '/login', component: () => import('../view/Login.vue') },
+    { path: '/dashboard', component: () => import('../view/Dashboard.vue') },
 ]
 
 const router = createRouter({

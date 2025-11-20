@@ -1,9 +1,12 @@
 <script setup>
 import { reactive, ref, watch } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import { login } from '../api/login.js'
 import { CONFIG } from '../config/index.js'
+import { showSuccess } from '../util/message.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const loginInfo = reactive({
     username: '',
@@ -43,11 +46,12 @@ const submitForm = () => {
             const token = res.data.data.token
             window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
             
-            ElMessage({
-                showClose: true,
-                message: '登录成功',
-                type: 'success',
-            })
+            showSuccess('登录成功')
+            
+            // 跳转到首页
+            setTimeout(() => {
+                router.replace('/dashboard')
+            }, 1000)
         }
     }).catch(err => {
         console.log('登录失败', err)
