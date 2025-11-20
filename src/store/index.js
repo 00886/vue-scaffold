@@ -8,13 +8,13 @@ export const useStoreDemo = defineStore('storeDemo', {
   // 其他配置...
   state: () => {
     return {
-        msg:"hello pinia store"
+        msg:'hello pinia store',
     }
   },
   getters: {},
   actions: {
     changeStoreDemo(value){
         this.msg = value
-    }
+    },
   },
 })
