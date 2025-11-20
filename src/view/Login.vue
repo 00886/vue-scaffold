@@ -1,6 +1,9 @@
 <script setup>
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { login } from '../api/login.js'
+import { CONFIG } from '../config/index.js'
 
 const loginInfo = reactive({
     username: '',
@@ -23,13 +26,33 @@ const loginButtonDisabled = ref(true)
 
 // 监听用户名和密码的变化，动态设置登录按钮的禁用状态
 watch(
-    [()=>loginInfo.username,()=>loginInfo.password],
+    [() => loginInfo.username, () => loginInfo.password],
     () => {
         loginRef.value.validate(valid => {
             loginButtonDisabled.value = !valid
         })
     }
 )
+
+const submitForm = () => {
+    login(loginInfo.username, loginInfo.password).then(res => {
+        // console.log('登录成功', res)
+        if (res.data.code === 0) {
+            // 登录成功
+            // 存储token到本地存储
+            const token = res.data.data.token
+            window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
+            
+            ElMessage({
+                showClose: true,
+                message: '登录成功',
+                type: 'success',
+            })
+        }
+    }).catch(err => {
+        console.log('登录失败', err)
+    })
+}
 </script>
 
 <template>
@@ -46,7 +69,7 @@ watch(
                     show-password />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm(ruleFormRef)" :disabled="loginButtonDisabled">
+                <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled">
                     登录
                 </el-button>
             </el-form-item>
