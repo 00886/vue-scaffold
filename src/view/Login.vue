@@ -65,15 +65,15 @@ const submitForm = () => {
 
         <el-form ref="loginRef" style="max-width: 600px" :model="loginInfo" status-icon :rules="rules"
             label-width="auto" class="demo-ruleForm">
-            <el-form-item label="Username" prop="username">
+            <el-form-item label="" prop="username" class="form-item">
                 <el-input v-model="loginInfo.username" :prefix-icon="User" clearable />
             </el-form-item>
-            <el-form-item label="Password" prop="password">
+            <el-form-item label="" prop="password" class="form-item">
                 <el-input v-model="loginInfo.password" type="password" autocomplete="off" :prefix-icon="Lock" clearable
                     show-password />
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled">
+                <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled" style="margin: 10px auto 10px auto;">
                     登录
                 </el-button>
             </el-form-item>
@@ -92,5 +92,10 @@ const submitForm = () => {
 
 .box-card {
     width: 480px;
+}
+
+.form-item {
+    width: 240px;
+    margin: 20px auto 10px auto;
 }
 </style>
