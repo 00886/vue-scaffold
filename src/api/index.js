@@ -58,7 +58,7 @@ axios.interceptors.response.use(response => {
 const request = ({ url = '', method = 'get', data = {}, timeout = 1000 }) => {
     // console.log("使用封装函数去处理请求")
     return new Promise((resolve, reject) => {
-        // console.log("使用axios去请求接口")
+    // console.log("使用axios去请求接口")
         const methodCast = method.toLowerCase()
 
         if (methodCast === 'get') {

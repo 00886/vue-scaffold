@@ -18,6 +18,7 @@ export default {
         '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }], //不允许出现多行空行，最多允许1行
         '@stylistic/no-trailing-spaces': ['error'], //不允许行尾出现空格
         '@stylistic/eol-last': ['error', 'always'], //文件以单一的换行符结束
+        '@stylistic/indent': ['error', 4], //缩进风格 4个空格
     },
 }
 

@@ -5,16 +5,16 @@ import { defineStore } from 'pinia'
 // (比如 `useUserStore`，`useCartStore`，`useProductStore`)
 // 第一个参数是你的应用中 Store 的唯一 ID。
 export const useStoreDemo = defineStore('storeDemo', {
-  // 其他配置...
-  state: () => {
-    return {
-        msg:'hello pinia store',
-    }
-  },
-  getters: {},
-  actions: {
-    changeStoreDemo(value){
-        this.msg = value
+    // 其他配置...
+    state: () => {
+        return {
+            msg:'hello pinia store',
+        }
     },
-  },
+    getters: {},
+    actions: {
+        changeStoreDemo(value){
+            this.msg = value
+        },
+    },
 })

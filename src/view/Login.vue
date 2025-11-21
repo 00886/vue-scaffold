@@ -45,12 +45,12 @@ const submitForm = () => {
             // 存储token到本地存储
             const token = res.data.data.token
             window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
-            
+
             showSuccess('登录成功')
-            
+
             // 跳转到首页
             setTimeout(() => {
-                router.replace('/dashboard')
+                router.replace('/')
             }, 1000)
         }
     }).catch(err => {
@@ -60,25 +60,28 @@ const submitForm = () => {
 </script>
 
 <template>
-    <el-card style="max-width: 480px" class="box-card">
-        <h2>后台管理系统</h2>
+    <div id="login" style="width: 100vw;">
+        <el-card style="max-width: 480px" class="box-card">
+            <h2>后台管理系统</h2>
 
-        <el-form ref="loginRef" style="max-width: 600px" :model="loginInfo" status-icon :rules="rules"
-            label-width="auto" class="demo-ruleForm">
-            <el-form-item label="" prop="username" class="form-item">
-                <el-input v-model="loginInfo.username" :prefix-icon="User" clearable />
-            </el-form-item>
-            <el-form-item label="" prop="password" class="form-item">
-                <el-input v-model="loginInfo.password" type="password" autocomplete="off" :prefix-icon="Lock" clearable
-                    show-password />
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled" style="margin: 10px auto 10px auto;">
-                    登录
-                </el-button>
-            </el-form-item>
-        </el-form>
-    </el-card>
+            <el-form ref="loginRef" style="max-width: 600px" :model="loginInfo" :rules="rules" label-width="auto"
+                class="demo-ruleForm">
+                <el-form-item prop="username" class="form-item">
+                    <el-input v-model="loginInfo.username" placeholder="请输入用户名" :prefix-icon="User" clearable />
+                </el-form-item>
+                <el-form-item prop="password" class="form-item">
+                    <el-input v-model="loginInfo.password" type="password" autocomplete="off" placeholder="请输入密码"
+                        :prefix-icon="Lock" clearable show-password />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled"
+                        style="margin: 10px auto 10px auto;">
+                        登录
+                    </el-button>
+                </el-form-item>
+            </el-form>
+        </el-card>
+    </div>
 </template>
 
 <style scoped>
@@ -92,6 +95,7 @@ const submitForm = () => {
 
 .box-card {
     width: 480px;
+    margin: 0 auto;
 }
 
 .form-item {

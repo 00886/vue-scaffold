@@ -1,14 +1,15 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { CONFIG } from '../config/index.js'
 
-const indexRoute = {
-    path: '/',
-    component: () => import('../view/Index.vue'),
-}
+// const indexRoute = {
+//     path: '/',
+//     component: () => import('../view/Index.vue'),
+// }
 const routes = [
-    indexRoute,
+    // indexRoute,
     { path: '/login', component: () => import('../view/Login.vue') },
     { path: '/dashboard', component: () => import('../view/Dashboard.vue') },
+    {path: '/', component: () => import('../view/layout/Layout.vue')},
 ]
 
 const router = createRouter({
@@ -39,9 +40,9 @@ router.beforeEach((to, from, next) => {
         // 访问了/login
         next()
     }else{
-        if(to.path === '/login' || to.path === '/'){
-            // 有token，并且访问了/login或/
-            next('/dashboard')
+        if(to.path === '/login'){
+            // 有token，并且访问了/login
+            next('/')
             return
         }
         next()
