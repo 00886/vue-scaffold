@@ -1,12 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { CONFIG } from '../config/index.js'
+import userRoutes from './user.js'
 
-// const indexRoute = {
-//     path: '/',
-//     component: () => import('../view/Index.vue'),
-// }
 const routes = [
-    // indexRoute,
+    userRoutes,
     { path: '/login', component: () => import('../view/Login.vue') },
     { path: '/dashboard', component: () => import('../view/Dashboard.vue') },
     {path: '/', component: () => import('../view/layout/Layout.vue')},

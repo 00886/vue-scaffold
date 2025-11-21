@@ -1,5 +1,7 @@
 <template>
-    <el-main>Main</el-main>
+    <el-main>
+        <router-view />
+    </el-main>
 </template>
 
 <script setup>

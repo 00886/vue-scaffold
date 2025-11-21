@@ -22,7 +22,7 @@
                         <span>{{ menu.name }}</span>
                     </template>
                     <template v-if="menu.children">
-                        <el-sub-menu v-for="children in menu.children">
+                        <el-sub-menu v-for="children in menu.children" :index="children.index" :key="children.index">
                             <template #title>
                                 <el-icon>
                                     <span :class="children.icon"></span>
