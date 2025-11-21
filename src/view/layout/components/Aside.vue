@@ -14,26 +14,34 @@
         <!-- menu -->
         <div>
             <el-menu default-active="2" class="el-menu-vertical-demo">
-                <el-sub-menu index="/user">
+                <el-sub-menu v-for="menu in MENU_CONFIG" :index="menu.index" :key="menu.index">
                     <template #title>
                         <el-icon>
                             <location />
                         </el-icon>
-                        <span>用户管理</span>
+                        <span>{{ menu.name }}</span>
                     </template>
-                    <el-menu-item index="/user/list">
-                        <el-icon><icon-menu /></el-icon>
-                        <template #title>用户列表</template>
-                    </el-menu-item>
-                    <el-menu-item index="/user/add">
-                        <el-icon><icon-menu /></el-icon>
-                        <template #title>添加用户</template>
-                    </el-menu-item>
+                    <template v-if="menu.children">
+                        <el-sub-menu v-for="children in menu.children">
+                            <template #title>
+                                <el-icon>
+                                    <location />
+                                </el-icon>
+                                <span>{{ children.name }}</span>
+                            </template>
+                            <el-menu-item v-for="item in children.item" :index="item.index" :key="item.index">
+                                <el-icon><icon-menu /></el-icon>
+                                <template #title>{{ item.name }}</template>Ï
+                            </el-menu-item>
+                        </el-sub-menu>
+                    </template>
+                    <template v-else>
+                        <el-menu-item v-for="item in menu.item" :index="item.index" :key="item.index">
+                            <el-icon><icon-menu /></el-icon>
+                            <template #title>{{ item.name }}</template>
+                        </el-menu-item>
+                    </template>
                 </el-sub-menu>
-                <el-menu-item index="/asset">
-                    <el-icon><icon-menu /></el-icon>
-                    <template #title>资产管理</template>
-                </el-menu-item>
             </el-menu>
         </div>
     </el-aside>
@@ -41,6 +49,8 @@
 
 <script setup>
 import { MoonNight } from '@element-plus/icons-vue'
+import { MENU_CONFIG } from '../../../config/menu.js'
+
 </script>
 
 <style lang="less" scoped>
