@@ -1,7 +1,7 @@
 export const MENU_CONFIG = [
     {
         name: ' 用户管理',
-        icon: '',
+        icon: 'iconfont icon-yonghuguanli',
         index: '/user',
         item: [
             {
@@ -18,12 +18,12 @@ export const MENU_CONFIG = [
     },
     {
         name: ' API管理',
-        icon: '',
+        icon: 'iconfont icon-APIguanli-01',
         index: '/api',
         children: [
             {
                 name: '接口管理',
-                icon: '',
+                icon: 'iconfont icon-APIguanli',
                 item: [
                     {
                         name: '接口版本管理',

@@ -1,0 +1,30 @@
+{
+  "id": "5071532",
+  "name": "vue-scaffold",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "21254883",
+      "name": "API管理",
+      "font_class": "APIguanli-01",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "27354251",
+      "name": "API管理",
+      "font_class": "APIguanli",
+      "unicode": "e71d",
+      "unicode_decimal": 59165
+    },
+    {
+      "icon_id": "4329914",
+      "name": "用户管理",
+      "font_class": "yonghuguanli",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    }
+  ]
+}
