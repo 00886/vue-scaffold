@@ -13,7 +13,7 @@
         </div>
         <!-- menu -->
         <div>
-            <el-menu default-active="2" class="el-menu-vertical-demo"  router>
+            <el-menu :default-active="$route.path" class="el-menu-vertical-demo"  router>
                 <el-sub-menu v-for="menu in MENU_CONFIG" :index="menu.index" :key="menu.index">
                     <template #title>
                         <el-icon>
