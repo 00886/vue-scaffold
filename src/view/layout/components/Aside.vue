@@ -11,6 +11,31 @@
                 </el-button>
             </router-link>
         </div>
+        <!-- menu -->
+        <div>
+            <el-menu default-active="2" class="el-menu-vertical-demo">
+                <el-sub-menu index="/user">
+                    <template #title>
+                        <el-icon>
+                            <location />
+                        </el-icon>
+                        <span>用户管理</span>
+                    </template>
+                    <el-menu-item index="/user/list">
+                        <el-icon><icon-menu /></el-icon>
+                        <template #title>用户列表</template>
+                    </el-menu-item>
+                    <el-menu-item index="/user/add">
+                        <el-icon><icon-menu /></el-icon>
+                        <template #title>添加用户</template>
+                    </el-menu-item>
+                </el-sub-menu>
+                <el-menu-item index="/asset">
+                    <el-icon><icon-menu /></el-icon>
+                    <template #title>资产管理</template>
+                </el-menu-item>
+            </el-menu>
+        </div>
     </el-aside>
 </template>
 
