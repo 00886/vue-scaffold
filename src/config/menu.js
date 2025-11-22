@@ -24,21 +24,22 @@ export const MENU_CONFIG = [
             {
                 name: '接口管理',
                 icon: 'iconfont icon-APIguanli',
+                index:'/api/manager',
                 item: [
                     {
                         name: '接口版本管理',
                         icon: '',
-                        index: '/api/version',
+                        index: '/api/manager/version',
                     },
                     {
                         name: '接口文档',
                         icon: '',
-                        index: '/api/document',
+                        index: '/api/manager/document',
                     },
                     {
                         name: '接口测试',
                         icon: '',
-                        index: '/api/test',
+                        index: '/api/manager/test',
                     },
                 ],
             },

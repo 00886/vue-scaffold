@@ -13,7 +13,7 @@
         </div>
         <!-- menu -->
         <div>
-            <el-menu :default-active="$route.path" class="el-menu-vertical-demo"  router>
+            <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
                 <el-sub-menu v-for="menu in MENU_CONFIG" :index="menu.index" :key="menu.index">
                     <template #title>
                         <el-icon>
@@ -22,14 +22,14 @@
                         <span>{{ menu.name }}</span>
                     </template>
                     <template v-if="menu.children">
-                        <el-sub-menu v-for="children in menu.children" :index="children.index" :key="children.index">
+                        <el-sub-menu v-for="(child, index) in menu.children" :index="child.index" :key="child.index">
                             <template #title>
                                 <el-icon>
-                                    <span :class="children.icon"></span>
+                                    <span :class="child.icon"></span>
                                 </el-icon>
-                                <span>{{ children.name }}</span>
+                                <span>{{ child.name }}</span>
                             </template>
-                            <el-menu-item v-for="item in children.item" :index="item.index" :key="item.index">
+                            <el-menu-item v-for="item in child.item" :index="item.index" :key="item.index">
                                 <span :class="item.icon"></span>
                                 <template #title>{{ item.name }}</template>
                             </el-menu-item>
