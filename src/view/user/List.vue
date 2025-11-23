@@ -4,7 +4,7 @@
             <div class="card-header">
                 <span>用户列表</span>
                 <div>
-                    <el-button text @click="">添加用户</el-button>
+                    <el-button text @click="addUserDialogVisible">添加用户</el-button>
                     <el-button text @click="">批量删除</el-button>
                 </div>
             </div>
@@ -30,6 +30,10 @@
                 </template>
             </el-table-column>
         </el-table>
+
+        <el-dialog v-model="addUserDialog" title="添加用户" width="500">
+            <Add></Add>
+        </el-dialog>
     </el-card>
 
 
@@ -41,6 +45,7 @@ import { onBeforeMount, reactive, ref, toRefs } from 'vue'
 import { fetchUserList, deleteUser } from '../../api/user.js'
 import { showError, showSuccess } from '../../util/message.js'
 import { ElMessageBox } from 'element-plus'
+import Add from './Add.vue'
 
 // 加载状态
 const loading = ref(false)
@@ -53,6 +58,9 @@ const data = reactive({
     userData: [],
 })
 
+const { userData } = toRefs(data)
+
+// 获取用户列表
 const handleUserList = () => {
     loading.value = true
     fetchUserList().then((res) => {
@@ -66,6 +74,7 @@ const handleUserList = () => {
     })
 }
 
+// 删除用户
 const handleDeleteUser = (id) => {
     ElMessageBox.confirm(
         `确认删除 ${id} 的用户吗？`,
@@ -83,7 +92,11 @@ const handleDeleteUser = (id) => {
     }).catch(() => { })
 }
 
-const { userData } = toRefs(data)
+const addUserDialog = ref(false)
+
+const addUserDialogVisible = () => {
+    addUserDialog.value = true
+}
 </script>
 
 <style scoped>
