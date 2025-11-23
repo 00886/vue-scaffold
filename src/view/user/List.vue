@@ -30,8 +30,8 @@
             </el-table-column>
         </el-table>
 
-        <el-dialog v-model="addUserDialog" title="添加用户" width="500">
-            <Add />
+        <el-dialog v-model="addUserDialog" destroy-on-close title="添加用户" width="500">
+            <Add @rollback="rollback" />
         </el-dialog>
     </el-card>
 </template>
@@ -92,6 +92,12 @@ const addUserDialog = ref(false)
 
 const addUserDialogVisible = () => {
     addUserDialog.value = true
+}
+
+// 关闭新增用户页面函数
+const rollback = () => {
+    addUserDialog.value = false
+    handleUserList()
 }
 </script>
 

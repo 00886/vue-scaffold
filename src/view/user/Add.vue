@@ -1,6 +1,12 @@
 <template>
     <div>
-        <el-form ref="userFormRef" :model="userForm" :rules="rules">
+        <el-form
+            ref="userFormRef"
+            :model="userForm"
+            :rules="rules"
+            v-loading="loading"
+            element-loading-text="努力加载中..."
+        >
             <el-form-item prop="username" label="用户名：" :label-width="formLabelWidth">
                 <el-input v-model="userForm.username" autocomplete="off" />
             </el-form-item>
@@ -43,9 +49,11 @@ const data = reactive({
     },
 })
 
+const emits = defineEmits(['rollback'])
 const userFormRef = ref()
 const { userForm } = toRefs(data)
 const formLabelWidth = '100px'
+const loading = ref(false)
 
 const rules = reactive({
     username: [
@@ -76,12 +84,14 @@ const clearForm = () => {
 const submitForm = () => {
     userFormRef.value.validate(valid => {
         if (valid) {
+            loading.value = true
             // 提交表单逻辑
             addUser(userForm.value)
                 .then(res => {
                     if (res.data.code === 0) {
                         showSuccess('用户添加成功')
-                        clearForm()
+                        loading.value = false
+                        emits('rollback')()
                     } else {
                         showError(res.data.message)
                     }
