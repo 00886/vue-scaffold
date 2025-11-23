@@ -94,6 +94,7 @@ const submitForm = () => {
                         emits('rollback')()
                     } else {
                         showError(res.data.message)
+                        loading.value = false
                     }
                 })
                 .catch(err => {
