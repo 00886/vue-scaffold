@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form :ref="userFormRef" :model="userForm">
+        <el-form ref="userFormRef" :model="userForm">
             <el-form-item prop="username" label="用户名：" :label-width="formLabelWidth">
                 <el-input v-model="userForm.username" autocomplete="off" />
             </el-form-item>
@@ -21,7 +21,7 @@
             </el-form-item>
         </el-form>
         <div class="dialog-footer">
-            <el-button>清空</el-button>
+            <el-button @click="clearForm">清空</el-button>
             <el-button type="primary">
                 提交
             </el-button>
@@ -46,6 +46,12 @@ const data = reactive({
 const userFormRef = ref()
 const { userForm } = toRefs(data)
 const formLabelWidth = '100px'
+
+
+// 清空表单
+const clearForm = () => {
+    userFormRef.value.resetFields()
+}
 </script>
 
 <style scoped></style>
