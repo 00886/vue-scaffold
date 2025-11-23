@@ -24,7 +24,7 @@ export const MENU_CONFIG = [
             {
                 name: '接口管理',
                 icon: 'iconfont icon-APIguanli',
-                index:'/api/manager',
+                index: '/api/manager',
                 item: [
                     {
                         name: '接口版本管理',

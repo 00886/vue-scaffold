@@ -8,7 +8,7 @@ const userRoutes = {
     children: [
         {
             path: 'list',
-            component:List,
+            component: List,
         },
         {
             path: 'add',

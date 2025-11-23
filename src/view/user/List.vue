@@ -4,12 +4,11 @@
             <div class="card-header">
                 <span>用户列表</span>
                 <div>
-                    <el-button text @click="addUserDialogVisible">添加用户</el-button>
-                    <el-button text @click="">批量删除</el-button>
+                    <el-button text @click="addUserDialogVisible"> 添加用户 </el-button>
+                    <el-button text @click=""> 批量删除 </el-button>
                 </div>
             </div>
         </template>
-
 
         <el-table ref="multipleTableRef" :data="userData" row-key="id" style="width: 100%">
             <el-table-column type="selection" width="55" />
@@ -32,13 +31,10 @@
         </el-table>
 
         <el-dialog v-model="addUserDialog" title="添加用户" width="500">
-            <Add></Add>
+            <Add />
         </el-dialog>
     </el-card>
-
-
 </template>
-
 
 <script setup>
 import { onBeforeMount, reactive, ref, toRefs } from 'vue'
@@ -63,33 +59,33 @@ const { userData } = toRefs(data)
 // 获取用户列表
 const handleUserList = () => {
     loading.value = true
-    fetchUserList().then((res) => {
-        data.userData = res.data.data
-        // 关闭加载状态
-        loading.value = false
-    }).catch((err) => {
-        // 关闭加载状态
-        loading.value = false
-        showError(err.userFriendlyMessage)
-    })
+    fetchUserList()
+        .then(res => {
+            data.userData = res.data.data
+            // 关闭加载状态
+            loading.value = false
+        })
+        .catch(err => {
+            // 关闭加载状态
+            loading.value = false
+            showError(err.userFriendlyMessage)
+        })
 }
 
 // 删除用户
-const handleDeleteUser = (id) => {
-    ElMessageBox.confirm(
-        `确认删除 ${id} 的用户吗？`,
-        '',
-        {
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            type: 'warning',
-        }
-    ).then(() => {
-        deleteUser(id).then((res) => {
-            showSuccess('删除成功')
-            handleUserList()
+const handleDeleteUser = id => {
+    ElMessageBox.confirm(`确认删除 ${id} 的用户吗？`, '', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+    })
+        .then(() => {
+            deleteUser(id).then(res => {
+                showSuccess('删除成功')
+                handleUserList()
+            })
         })
-    }).catch(() => { })
+        .catch(() => {})
 }
 
 const addUserDialog = ref(false)

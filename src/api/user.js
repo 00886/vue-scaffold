@@ -7,7 +7,7 @@ export const fetchUserList = () => {
     })
 }
 
-export const deleteUser = (id) => {
+export const deleteUser = id => {
     return request({
         url: API_CONFIG.DelteUserAPI,
         data: { id },

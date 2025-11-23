@@ -1,10 +1,10 @@
 <template>
-    <el-aside width="240px" style="border-right: 1px #cccccc solid;">
+    <el-aside width="240px" style="border-right: 1px #cccccc solid">
         <!-- logo -->
         <div class="aside-logo">
             <router-link to="/">
-                <el-button text style="font-size: 25px;">
-                    <el-icon :size="24" style="margin-right: 10px;">
+                <el-button text style="font-size: 25px">
+                    <el-icon :size="24" style="margin-right: 10px">
                         <MoonNight />
                     </el-icon>
                     管理后台
@@ -14,33 +14,37 @@
         <!-- menu -->
         <div>
             <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router>
-                <el-sub-menu v-for="menu in MENU_CONFIG" :index="menu.index" :key="menu.index">
+                <el-sub-menu v-for="menu in MENU_CONFIG" :key="menu.index" :index="menu.index">
                     <template #title>
                         <el-icon>
-                            <span :class="menu.icon"></span>
+                            <span :class="menu.icon" />
                         </el-icon>
                         <span>{{ menu.name }}</span>
                     </template>
                     <template v-if="menu.children">
-                        <el-sub-menu v-for="(child, index) in menu.children" :index="child.index" :key="child.index">
+                        <el-sub-menu v-for="(child, index) in menu.children" :key="child.index" :index="child.index">
                             <template #title>
                                 <el-icon>
-                                    <span :class="child.icon"></span>
+                                    <span :class="child.icon" />
                                 </el-icon>
                                 <span>{{ child.name }}</span>
                             </template>
-                            <el-menu-item v-for="item in child.item" :index="item.index" :key="item.index">
-                                <span :class="item.icon"></span>
-                                <template #title>{{ item.name }}</template>
+                            <el-menu-item v-for="item in child.item" :key="item.index" :index="item.index">
+                                <span :class="item.icon" />
+                                <template #title>
+                                    {{ item.name }}
+                                </template>
                             </el-menu-item>
                         </el-sub-menu>
                     </template>
                     <template v-else>
-                        <el-menu-item v-for="item in menu.item" :index="item.index" :key="item.index">
+                        <el-menu-item v-for="item in menu.item" :key="item.index" :index="item.index">
                             <el-icon>
-                                <span :class="item.icon"></span>
+                                <span :class="item.icon" />
                             </el-icon>
-                            <template #title>{{ item.name }}</template>
+                            <template #title>
+                                {{ item.name }}
+                            </template>
                         </el-menu-item>
                     </template>
                 </el-sub-menu>

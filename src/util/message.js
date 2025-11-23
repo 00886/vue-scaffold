@@ -1,11 +1,6 @@
 import { ElMessage } from 'element-plus'
 
-export const showMessage = ({
-    message = '',
-    type = 'info',
-    duration = 1500,
-    showClose = true,
-}) => {
+export const showMessage = ({ message = '', type = 'info', duration = 1500, showClose = true }) => {
     ElMessage({
         message,
         type,
@@ -14,7 +9,7 @@ export const showMessage = ({
     })
 }
 
-export const showSuccess = (message) => showMessage({ message: message, type: 'success' })
-export const showError = (message) => showMessage({ message: message, type: 'error' })
-export const showWarning = (message) => showMessage({ message: message, type: 'warning' })
-export const showInfo = (message) => showMessage({ message: message, type: 'info' })
+export const showSuccess = message => showMessage({ message: message, type: 'success' })
+export const showError = message => showMessage({ message: message, type: 'error' })
+export const showWarning = message => showMessage({ message: message, type: 'warning' })
+export const showInfo = message => showMessage({ message: message, type: 'info' })

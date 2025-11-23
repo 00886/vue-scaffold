@@ -10,7 +10,7 @@ const router = useRouter()
 
 const loginInfo = reactive({
     username: '',
-    password: ''
+    password: '',
 })
 
 const loginRef = ref()
@@ -28,57 +28,73 @@ const rules = reactive({
 const loginButtonDisabled = ref(true)
 
 // 监听用户名和密码的变化，动态设置登录按钮的禁用状态
-watch(
-    [() => loginInfo.username, () => loginInfo.password],
-    () => {
-        loginRef.value.validate(valid => {
-            loginButtonDisabled.value = !valid
-        })
-    }
-)
+watch([() => loginInfo.username, () => loginInfo.password], () => {
+    loginRef.value.validate(valid => {
+        loginButtonDisabled.value = !valid
+    })
+})
 
 const submitForm = () => {
-    login(loginInfo.username, loginInfo.password).then(res => {
-        // console.log('登录成功', res)
-        if (res.data.code === 0) {
-            // 登录成功
-            // 存储token到本地存储
-            const token = res.data.data
-            window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
+    login(loginInfo.username, loginInfo.password)
+        .then(res => {
+            // console.log('登录成功', res)
+            if (res.data.code === 0) {
+                // 登录成功
+                // 存储token到本地存储
+                const token = res.data.data
+                window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
 
-            showSuccess('登录成功')
+                showSuccess('登录成功')
 
-            // 跳转到首页
-            setTimeout(() => {
-                router.replace('/')
-            }, 1000)
-        } else {
-            // 登录失败
-            showWarning(res.data.message)
-        }
-    }).catch(err => {
-        showError(err.userFriendlyMessage)
-    })
+                // 跳转到首页
+                setTimeout(() => {
+                    router.replace('/')
+                }, 1000)
+            } else {
+                // 登录失败
+                showWarning(res.data.message)
+            }
+        })
+        .catch(err => {
+            showError(err.userFriendlyMessage)
+        })
 }
 </script>
 
 <template>
-    <div id="login" style="width: 100vw;">
+    <div id="login" style="width: 100vw">
         <el-card style="max-width: 480px" class="box-card">
             <h2>后台管理系统</h2>
 
-            <el-form ref="loginRef" style="max-width: 600px" :model="loginInfo" :rules="rules" label-width="auto"
-                class="demo-ruleForm">
+            <el-form
+                ref="loginRef"
+                style="max-width: 600px"
+                :model="loginInfo"
+                :rules="rules"
+                label-width="auto"
+                class="demo-ruleForm"
+            >
                 <el-form-item prop="username" class="form-item">
                     <el-input v-model="loginInfo.username" placeholder="请输入用户名" :prefix-icon="User" clearable />
                 </el-form-item>
                 <el-form-item prop="password" class="form-item">
-                    <el-input v-model="loginInfo.password" type="password" autocomplete="off" placeholder="请输入密码"
-                        :prefix-icon="Lock" clearable show-password />
+                    <el-input
+                        v-model="loginInfo.password"
+                        type="password"
+                        autocomplete="off"
+                        placeholder="请输入密码"
+                        :prefix-icon="Lock"
+                        clearable
+                        show-password
+                    />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm()" :disabled="loginButtonDisabled"
-                        style="margin: 10px auto 10px auto;">
+                    <el-button
+                        type="primary"
+                        :disabled="loginButtonDisabled"
+                        style="margin: 10px auto 10px auto"
+                        @click="submitForm()"
+                    >
                         登录
                     </el-button>
                 </el-form-item>

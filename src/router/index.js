@@ -6,7 +6,7 @@ const routes = [
     userRoutes,
     { path: '/login', component: () => import('../view/Login.vue') },
     { path: '/dashboard', component: () => import('../view/Dashboard.vue') },
-    {path: '/', component: () => import('../view/layout/Layout.vue')},
+    { path: '/', component: () => import('../view/layout/Layout.vue') },
 ]
 
 const router = createRouter({
@@ -29,15 +29,15 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const token = window.localStorage.getItem(CONFIG.TOKEN_NAME)
     if (!token) {
-        if(to.path !== '/login'){
+        if (to.path !== '/login') {
             // 没有token，并且未访问/login
             next('/login')
             return
         }
         // 访问了/login
         next()
-    }else{
-        if(to.path === '/login'){
+    } else {
+        if (to.path === '/login') {
             // 有token，并且访问了/login
             next('/')
             return

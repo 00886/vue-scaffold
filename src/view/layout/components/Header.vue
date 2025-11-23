@@ -2,8 +2,6 @@
     <el-header>Header</el-header>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped></style>

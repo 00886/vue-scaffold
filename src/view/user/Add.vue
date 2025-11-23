@@ -21,10 +21,8 @@
             </el-form-item>
         </el-form>
         <div class="dialog-footer">
-            <el-button @click="clearForm">清空</el-button>
-            <el-button type="primary">
-                提交
-            </el-button>
+            <el-button @click="clearForm"> 清空 </el-button>
+            <el-button type="primary"> 提交 </el-button>
         </div>
     </div>
 </template>
@@ -40,13 +38,12 @@ const data = reactive({
         sex: '',
         phone: '',
         city: '',
-    }
+    },
 })
 
 const userFormRef = ref()
 const { userForm } = toRefs(data)
 const formLabelWidth = '100px'
-
 
 // 清空表单
 const clearForm = () => {
