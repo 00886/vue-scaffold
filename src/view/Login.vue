@@ -3,7 +3,7 @@ import { reactive, ref, watch } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import { login } from '../api/login.js'
 import { CONFIG } from '../config/index.js'
-import { showSuccess } from '../util/message.js'
+import { showError, showSuccess, showWarning } from '../util/message.js'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -43,7 +43,7 @@ const submitForm = () => {
         if (res.data.code === 0) {
             // 登录成功
             // 存储token到本地存储
-            const token = res.data.data.token
+            const token = res.data.data
             window.localStorage.setItem(CONFIG.TOKEN_NAME, token)
 
             showSuccess('登录成功')
@@ -52,9 +52,12 @@ const submitForm = () => {
             setTimeout(() => {
                 router.replace('/')
             }, 1000)
+        } else {
+            // 登录失败
+            showWarning(res.data.message)
         }
     }).catch(err => {
-        console.log('登录失败', err)
+        showError(err.userFriendlyMessage)
     })
 }
 </script>
