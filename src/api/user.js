@@ -13,3 +13,11 @@ export const deleteUser = id => {
         data: { id },
     })
 }
+
+export const addUser = data => {
+    return request({
+        url: API_CONFIG.AddUserAPI,
+        method: 'POST',
+        data,
+    })
+}

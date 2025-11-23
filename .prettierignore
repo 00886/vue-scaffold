@@ -14,11 +14,10 @@ build/
 
 vite.config.js
 README.md
-prettier.config.js
 pnpm-lock.yaml
 package.json
 eslint.config.js
-.prettierignore
+prettier.config.js
 .gitignore
 src/assets/
 .git/

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-form ref="userFormRef" :model="userForm">
+        <el-form ref="userFormRef" :model="userForm" :rules="rules">
             <el-form-item prop="username" label="用户名：" :label-width="formLabelWidth">
                 <el-input v-model="userForm.username" autocomplete="off" />
             </el-form-item>
@@ -22,7 +22,7 @@
         </el-form>
         <div class="dialog-footer">
             <el-button @click="clearForm"> 清空 </el-button>
-            <el-button type="primary"> 提交 </el-button>
+            <el-button type="primary" @click="submitForm"> 提交 </el-button>
         </div>
     </div>
 </template>
@@ -30,6 +30,8 @@
 <script setup>
 import { reactive, ref, toRefs } from 'vue'
 import { ElForm } from 'element-plus'
+import { addUser } from '../../api/user.js'
+import { showError, showSuccess } from '../../util/message'
 
 const data = reactive({
     userForm: {
@@ -45,9 +47,52 @@ const userFormRef = ref()
 const { userForm } = toRefs(data)
 const formLabelWidth = '100px'
 
+const rules = reactive({
+    username: [
+        { required: true, message: '请输入用户名', trigger: 'blur' },
+        { min: 1, max: 10, message: '长度在1到10个字符', trigger: 'blur' },
+    ],
+    password: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { min: 1, max: 10, message: '长度在1到10个字符', trigger: 'blur' },
+    ],
+    sex: [{ required: true, message: '请选择性别', trigger: 'change' }],
+    phone: [
+        { required: true, message: '请输入电话', trigger: 'blur' },
+        { min: 1, max: 15, message: '长度在1到15个字符', trigger: 'blur' },
+    ],
+    city: [
+        { required: true, message: '请输入城市', trigger: 'blur' },
+        { min: 1, max: 20, message: '长度在1到20个字符', trigger: 'blur' },
+    ],
+})
+
 // 清空表单
 const clearForm = () => {
     userFormRef.value.resetFields()
+}
+
+// 提交表单
+const submitForm = () => {
+    userFormRef.value.validate(valid => {
+        if (valid) {
+            // 提交表单逻辑
+            addUser(userForm.value)
+                .then(res => {
+                    if (res.data.code === 0) {
+                        showSuccess('用户添加成功')
+                        clearForm()
+                    } else {
+                        showError(res.data.message)
+                    }
+                })
+                .catch(err => {
+                    console.log('添加用户出错:', err)
+                })
+        } else {
+            return false
+        }
+    })
 }
 </script>
 
