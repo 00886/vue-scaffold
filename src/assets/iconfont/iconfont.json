@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "741048",
+      "name": "登出 退出 关闭",
+      "font_class": "dengchutuichuguanbi",
+      "unicode": "e846",
+      "unicode_decimal": 59462
+    },
+    {
+      "icon_id": "27353934",
+      "name": "小菜单_折叠",
+      "font_class": "appshouqi",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
       "icon_id": "21254883",
       "name": "API管理",
       "font_class": "APIguanli-01",
