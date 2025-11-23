@@ -20,7 +20,7 @@
             <el-table-column prop="city" label="City" />
             <el-table-column label="操作">
                 <template #default="scope">
-                    <el-button size="small" text type="primary" @click="handleEdit(scope.$index, scope.row)">
+                    <el-button size="small" text type="primary" @click="editUserDialogVisible(scope.row)">
                         编辑
                     </el-button>
                     <el-button size="small" type="danger" text @click="handleDeleteUser(scope.row.id)">
@@ -30,8 +30,13 @@
             </el-table-column>
         </el-table>
 
-        <el-dialog v-model="addUserDialog" destroy-on-close title="添加用户" width="500">
-            <Add @rollback="rollback" />
+        <el-dialog
+            v-model="addUserDialog"
+            destroy-on-close
+            :title="defaultMethod == 'create' ? '新增用户' : '编辑用户'"
+            width="500"
+        >
+            <Add @rollback="rollback" :method="defaultMethod" :user-form="userForm" />
         </el-dialog>
     </el-card>
 </template>
@@ -45,16 +50,22 @@ import Add from './Add.vue'
 
 // 加载状态
 const loading = ref(false)
+const defaultMethod = ref('create')
+const data = reactive({
+    userData: [],
+    userForm: {
+        username: '',
+        password: '',
+        sex: '',
+        phone: '',
+        city: '',
+    },
+})
+const { userData, userForm } = toRefs(data)
 
 onBeforeMount(() => {
     handleUserList()
 })
-
-const data = reactive({
-    userData: [],
-})
-
-const { userData } = toRefs(data)
 
 // 获取用户列表
 const handleUserList = () => {
@@ -90,8 +101,19 @@ const handleDeleteUser = id => {
 
 const addUserDialog = ref(false)
 
+// 弹出新增用户窗口
 const addUserDialogVisible = () => {
+    userForm.value = {}
+    defaultMethod.value = 'create'
     addUserDialog.value = true
+}
+
+// 弹出用户编辑窗口
+const editUserDialogVisible = row => {
+    defaultMethod.value = 'edit'
+    addUserDialog.value = true
+    userForm.value = row
+    console.log(userForm)
 }
 
 // 关闭新增用户页面函数

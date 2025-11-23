@@ -28,25 +28,19 @@
         </el-form>
         <div class="dialog-footer">
             <el-button @click="clearForm"> 清空 </el-button>
-            <el-button type="primary" @click="submitForm"> 提交 </el-button>
+            <el-button type="primary" @click="submitForm"> {{ props.method == 'create' ? '提交' : '更新' }} </el-button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive, ref, toRefs } from 'vue'
+import { onBeforeMount, onMounted, reactive, ref, toRefs } from 'vue'
 import { ElForm } from 'element-plus'
-import { addUser } from '../../api/user.js'
-import { showError, showSuccess } from '../../util/message'
+import { addUser, updateUser } from '../../api/user.js'
+import { showError, showSuccess } from '../../util/message.js'
 
 const data = reactive({
-    userForm: {
-        username: '',
-        password: '',
-        sex: '',
-        phone: '',
-        city: '',
-    },
+    userForm: {},
 })
 
 const emits = defineEmits(['rollback'])
@@ -75,8 +69,25 @@ const rules = reactive({
     ],
 })
 
+const props = defineProps({
+    // 判断当前是创建还是更新
+    method: {
+        type: String,
+        default: 'create',
+    },
+    userForm: {
+        type: Object,
+    },
+})
+
+onMounted(() => {
+    // 使用深拷贝，不然会父组件列表的数据也同时修改
+    userForm.value = JSON.parse(JSON.stringify(props.userForm))
+})
+
 // 清空表单
 const clearForm = () => {
+    // 注意生命周期，不然可能不起作用
     userFormRef.value.resetFields()
 }
 
@@ -84,22 +95,41 @@ const clearForm = () => {
 const submitForm = () => {
     userFormRef.value.validate(valid => {
         if (valid) {
-            loading.value = true
-            // 提交表单逻辑
-            addUser(userForm.value)
-                .then(res => {
-                    if (res.data.code === 0) {
-                        showSuccess('用户添加成功')
-                        loading.value = false
-                        emits('rollback')()
-                    } else {
-                        showError(res.data.message)
-                        loading.value = false
-                    }
-                })
-                .catch(err => {
-                    console.log('添加用户出错:', err)
-                })
+            // 新增
+            if (props.method === 'create') {
+                loading.value = true
+                // 提交表单逻辑
+                addUser(userForm.value)
+                    .then(res => {
+                        if (res.data.code === 0) {
+                            showSuccess('添加成功')
+                            loading.value = false
+                            emits('rollback')()
+                        } else {
+                            showError(res.data.message)
+                            loading.value = false
+                        }
+                    })
+                    .catch(err => {
+                        console.log('添加用户出错:', err)
+                    })
+            } else {
+                // 更新
+                updateUser(userForm.value)
+                    .then(res => {
+                        if (res.data.code === 0) {
+                            showSuccess('更新成功')
+                            loading.value = false
+                            emits('rollback')
+                        } else {
+                            showError(res.data.message)
+                            loading.value = false
+                        }
+                    })
+                    .catch(err => {
+                        console.log('更新用户出错:', err)
+                    })
+            }
         } else {
             return false
         }

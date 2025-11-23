@@ -21,3 +21,11 @@ export const addUser = data => {
         data,
     })
 }
+
+export const updateUser = data => {
+    return request({
+        url: API_CONFIG.UpdateUserAPI,
+        method: 'POST',
+        data,
+    })
+}

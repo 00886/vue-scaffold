@@ -5,6 +5,7 @@ export const API_CONFIG = {
     userListAPI: 'http://localhost:8888/api/user/list',
     DelteUserAPI: 'http://localhost:8888/api/user/delete',
     AddUserAPI: 'http://localhost:8888/api/user/add',
+    UpdateUserAPI: 'http://localhost:8888/api/user/update',
 }
 
 export const CONFIG = {
