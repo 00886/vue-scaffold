@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-header class="el-header">
-            <el-button aria-label="折叠菜单">
+            <el-button aria-label="折叠菜单" @click="handleCollapseMenu">
                 <el-icon :size="25"><span class="iconfont icon-appshouqi"></span></el-icon>
             </el-button>
             <el-button @click="handleLogout" aria-label="退出系统"
@@ -17,6 +17,11 @@ import { CONFIG } from '../../../config/index.js'
 import { useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
 import { showWarning } from '../../../util/message.js'
+import { useIsCollapse } from '../../../store/index.js'
+import { storeToRefs } from 'pinia'
+
+const storeIsCollapse = useIsCollapse()
+const { isCollapse } = storeToRefs(storeIsCollapse)
 
 const router = useRouter()
 
@@ -35,6 +40,10 @@ const handleLogout = () => {
             }, 1500)
         })
         .catch(() => {})
+}
+
+const handleCollapseMenu = () => {
+    isCollapse.value = !isCollapse.value
 }
 </script>
 
