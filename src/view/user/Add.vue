@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, reactive, ref, toRefs } from 'vue'
+import { onMounted, reactive, ref, toRefs } from 'vue'
 import { ElForm } from 'element-plus'
 import { addUser, updateUser } from '../../api/user.js'
 import { showError, showSuccess } from '../../util/message.js'

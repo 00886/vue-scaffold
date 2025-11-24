@@ -1,6 +1,6 @@
 const Layout = () => import('../view/layout/Layout.vue')
 const List = () => import('../view/user/List.vue')
-const Add = () => import('../view/user/Add.vue')
+const Test = () => import('../view/user/Test.vue')
 
 const userRoutes = {
     path: '/user',
@@ -11,8 +11,8 @@ const userRoutes = {
             component: List,
         },
         {
-            path: 'add',
-            component: Add,
+            path: 'test',
+            component: Test,
         },
     ],
 }

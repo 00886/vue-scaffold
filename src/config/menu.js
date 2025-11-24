@@ -10,9 +10,9 @@ export const MENU_CONFIG = [
                 index: '/user/list',
             },
             {
-                name: '添加用户',
+                name: '测试页面',
                 icon: '',
-                index: '/user/add',
+                index: '/user/test',
             },
         ],
     },

@@ -42,11 +42,13 @@
 </template>
 
 <script setup>
-import { onBeforeMount, reactive, ref, toRefs } from 'vue'
+import { onMounted, reactive, ref, toRefs } from 'vue'
 import { fetchUserList, deleteUser } from '../../api/user.js'
 import { showError, showSuccess } from '../../util/message.js'
 import { ElMessageBox } from 'element-plus'
 import Add from './Add.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 // 加载状态
 const loading = ref(false)
@@ -63,7 +65,8 @@ const data = reactive({
 })
 const { userData, userForm } = toRefs(data)
 
-onBeforeMount(() => {
+// 组件挂载后重新渲染列表
+onMounted(() => {
     handleUserList()
 })
 

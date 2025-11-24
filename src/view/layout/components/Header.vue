@@ -1,10 +1,10 @@
 <template>
     <div>
         <el-header class="el-header">
-            <el-button>
+            <el-button aria-label="折叠菜单">
                 <el-icon :size="25"><span class="iconfont icon-appshouqi"></span></el-icon>
             </el-button>
-            <el-button @click="handleLogout"
+            <el-button @click="handleLogout" aria-label="退出系统"
                 ><el-icon :size="25"><span class="iconfont icon-dengchutuichuguanbi"></span></el-icon
             ></el-button>
         </el-header>
